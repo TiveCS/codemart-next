@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply font-medium rounded-md; 
+  }
+
+  .btn-size-sm {
+    @apply px-6 py-2
+  }
+
+  .btn-size-md {
+    @apply px-8 py-2
+  }
+
+  .btn-size-lg {
+    @apply px-16 py-4
+  }
+
+  .btn-text-sm {
+    @apply text-sm;
+  }
+
+  .btn-text-base {
+    @apply text-base;
+  }
+
+  .btn-text-lg {
+    @apply text-lg;
+  }
+
+  .btn-w-full {
+    @apply w-full;
+  }
+
+  .btn-w-half {
+    @apply w-1/2;
+  }
+
+  .btn-w-quarter {
+    @apply w-1/4;
+  }
+
+  .btn-primary {
+    @apply bg-recandy-blue-600 text-recandy-white-0 hover:bg-recandy-blue-700;
+  }
+
+  .btn-outline {
+    @apply border border-recandy-blue-600 text-recandy-blue-600 hover:bg-recandy-blue-600 hover:text-recandy-white-0;
+  }
+
+  .btn-text {
+    @apply text-recandy-blue-600 hover:bg-recandy-blue-600 hover:text-recandy-white-0;
+  }  
+}
