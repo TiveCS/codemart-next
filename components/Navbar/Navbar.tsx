@@ -12,7 +12,7 @@ const Navbar: React.FC<Props> = (props) => {
   return (
     <nav
       className={
-        'px-32 py-4 mb-12 flex flex-row justify-between items-center shadow-md ' +
+        'px-32 py-4 flex flex-row justify-between items-center shadow-md ' +
         props.className
       }
     >
