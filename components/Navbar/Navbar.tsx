@@ -3,12 +3,15 @@ import Image from 'next/image';
 import Button from '../Button';
 import Nav from './Nav';
 import Logo from '../../public/logo-colored.svg';
+import { signOut, useSession } from 'next-auth/react';
 
 export interface Props {
   className?: string;
 }
 
 const Navbar: React.FC<Props> = (props) => {
+  const { data: session, status } = useSession();
+
   return (
     <nav
       className={
@@ -29,18 +32,21 @@ const Navbar: React.FC<Props> = (props) => {
         </div>
       </div>
 
-      <div className="flex flex-row space-x-8">
-        <Link href={'/login'}>
-          <Button type="text" size="md" textSize="sm">
-            Login
-          </Button>
-        </Link>
-
-        <Link href={'/register'}>
-          <Button type="primary" size="md" textSize="sm">
-            Join Now
-          </Button>
-        </Link>
+      <div className="flex flex-row items-center space-x-8 ">
+        {status === 'authenticated' ? (
+          <>
+            <p>{session.user?.name}</p>
+            <Button type="text" textSize="sm" onClick={() => signOut()}>
+              Sign Out
+            </Button>
+          </>
+        ) : (
+          <Link href={'/auth/signin'}>
+            <Button type="primary" size="md" textSize="sm">
+              Join Now
+            </Button>
+          </Link>
+        )}
       </div>
     </nav>
   );

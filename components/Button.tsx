@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 
 export interface Props {
-  children: string;
+  children: string | string[];
   type: 'primary' | 'outline' | 'text';
   size?: 'sm' | 'md' | 'lg';
   textSize?: 'sm' | 'base' | 'lg';
   width?: 'normal' | 'full' | 'half' | 'quarter';
+
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const Button: React.FC<Props> = (props) => {
@@ -28,7 +30,11 @@ const Button: React.FC<Props> = (props) => {
     'btn-text-lg': props.textSize === 'lg',
   });
 
-  return <button className={classes}>{props.children}</button>;
+  return (
+    <button onClick={props.onClick} className={classes}>
+      {props.children}
+    </button>
+  );
 };
 
 export default Button;
