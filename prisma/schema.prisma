@@ -48,6 +48,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  products      Product[]
 
   @@map("users")
 }
@@ -59,4 +60,38 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  @@map("categories")
+}
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  title       String
+  price       Int     @default(0)
+  description String?
+  file_url    String
+  image_url   String?
+
+  author    User   @relation(fields: [author_id], references: [id])
+  author_id String
+
+  categories Category[]
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  @@map("products")
 }

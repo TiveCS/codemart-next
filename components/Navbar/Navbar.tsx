@@ -26,8 +26,8 @@ const Navbar: React.FC<Props> = (props) => {
 
         <div className="flex flex-row">
           <Nav href="/">Home</Nav>
-          <Nav href="/sell">Sell Product</Nav>
-          <Nav href="/browse">Browse</Nav>
+          <Nav href="/products/sell">Sell Product</Nav>
+          <Nav href="/products">Browse</Nav>
           <Nav href="/forum">Forum</Nav>
         </div>
       </div>
