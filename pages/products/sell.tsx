@@ -7,6 +7,21 @@ import FormInput from '../../components/FormInput';
 import FormRadio from '../../components/FormRadio';
 import UploadFile from '../../components/pages/Sell/UploadFile';
 
+interface Payload {
+  title: string;
+  categories: string[];
+  pictureFile: string | undefined;
+  sourceFile: string | undefined;
+  price: number;
+  description: string;
+  authorEmail: string | null | undefined;
+}
+
+interface ValidationResponse {
+  messages: { [key: string]: string };
+  isValid: boolean;
+}
+
 export default function SellPage() {
   const { data: session, status } = useSession();
   const [sourceFileResource, setSourceFileResource] = useState<string>('URL');
@@ -20,6 +35,7 @@ export default function SellPage() {
   const [categories, setCategories] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleGetFileUrl = (name: string, url: string) => {
     setFileUrl({ ...fileUrl, [name]: url });
@@ -30,6 +46,7 @@ export default function SellPage() {
   };
 
   const handleSubmit = async () => {
+    setErrors({});
     const cat = categories.split(',').map((c) => c.trim());
 
     const payload = {
@@ -41,6 +58,12 @@ export default function SellPage() {
       description,
       authorEmail: session?.user?.email,
     };
+
+    const validation = validatePayload(payload);
+    if (!validation.isValid) {
+      setErrors(validation.messages);
+      return;
+    }
 
     const response = await fetch('/api/products', {
       method: 'POST',
@@ -55,6 +78,24 @@ export default function SellPage() {
     console.log(data);
   };
 
+  const validatePayload = (payload: Payload): ValidationResponse => {
+    const { title, categories, pictureFile, sourceFile, price } = payload;
+    const msg = {} as { [key: string]: string };
+
+    if (!title) msg['title'] = 'Title is required';
+
+    if (!categories || categories.length === 0)
+      msg['categories'] = 'Categories are required';
+
+    if (!pictureFile) msg['pictureFile'] = 'Picture is required';
+
+    if (!sourceFile) msg['sourceFile'] = 'Source file is required';
+
+    if (price < 0) msg['price'] = 'Price must be greater than 0';
+
+    return { messages: msg, isValid: Object.keys(msg).length === 0 };
+  };
+
   return (
     <>
       <Head>
@@ -63,7 +104,9 @@ export default function SellPage() {
       <div className="grid max-w-6xl grid-flow-row px-16 py-24 mx-auto gap-y-8">
         <div className="grid grid-flow-col gap-16">
           <label htmlFor="title">
-            <p className="text-lg font-medium">Title</p>
+            <p className="text-lg font-medium">
+              Title<span className="text-red-600">*</span>
+            </p>
             <FormInput
               id="title"
               type={'text'}
@@ -73,7 +116,9 @@ export default function SellPage() {
           </label>
 
           <label htmlFor="categories">
-            <p className="text-lg font-medium">Categories</p>
+            <p className="text-lg font-medium">
+              Categories<span className="text-red-600">*</span>
+            </p>
             <FormInput
               id="categories"
               type={'text'}
@@ -85,7 +130,9 @@ export default function SellPage() {
         </div>
 
         <div>
-          <p className="text-lg font-medium">Application Picture</p>
+          <p className="text-lg font-medium">
+            Application Picture<span className="text-red-600">*</span>
+          </p>
           <UploadFile
             name="picture"
             accept="image/*"
@@ -95,7 +142,9 @@ export default function SellPage() {
         </div>
 
         <div className="flex flex-col my-4">
-          <p className="mb-4 text-lg font-medium">Upload Source File</p>
+          <p className="mb-4 text-lg font-medium">
+            Upload Source File<span className="text-red-600">*</span>
+          </p>
           <div className="flex flex-row mb-4 space-x-6">
             <p>Source file resource:</p>
             <FormRadio
