@@ -16,12 +16,10 @@ const DetailProduct = (props: DetailProductProps) => {
 
   const { product } = props;
 
-  const title: string = product.title;
-
   return (
     <>
       <Head>
-        <title>{product.title} | Product</title>
+        <title>CodeMart | Details</title>
       </Head>
       <div className="px-8 py-12 mx-24 my-16 rounded-sm shadow-md">
         <HeroProduct product={product} />

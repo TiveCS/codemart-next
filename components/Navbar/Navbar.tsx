@@ -43,7 +43,7 @@ const Navbar: React.FC<Props> = (props) => {
         ) : (
           <Link href={'/auth/signin'}>
             <Button type="primary" size="md" textSize="sm">
-              Join Now
+              {status === 'loading' ? 'Loading...' : 'Sign In'}
             </Button>
           </Link>
         )}
