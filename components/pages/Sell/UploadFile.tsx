@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import Button from '../../Button';
 import ProgressBar from './ProgressBar';
@@ -101,7 +102,13 @@ const UploadFile = ({
             className="flex items-center justify-center border-2 border-dashed rounded w-72 aspect-video"
           >
             {accept?.startsWith('image') && url ? (
-              <img src={url} alt="" />
+              <img
+                style={{
+                  opacity: uploading ? '.5' : '1',
+                }}
+                src={url}
+                alt=""
+              />
             ) : (
               <span>{placeholder}</span>
             )}
