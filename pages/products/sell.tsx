@@ -209,12 +209,21 @@ export default function SellPage() {
           <FormInput
             id="description"
             type={'text'}
-            onChange={(e) => setDescription(e.target.value)}
+            onChangeTextArea={(e) => setDescription(e.target.value)}
             isTextArea
           />
         </label>
 
-        <Button width="fit" type="primary" onClick={handleSubmit} textSize="sm">
+        <Button
+          style={{
+            opacity: isSubmitting ? '.5' : '1',
+            cursor: isSubmitting ? 'not-allowed' : 'pointer',
+          }}
+          width="fit"
+          type="primary"
+          onClick={handleSubmit}
+          textSize="sm"
+        >
           {isSubmitting ? 'Submitting...' : 'Submit'}
         </Button>
       </div>
