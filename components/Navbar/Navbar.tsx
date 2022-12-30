@@ -28,7 +28,6 @@ const Navbar: React.FC<Props> = (props) => {
           <Nav href="/">Home</Nav>
           <Nav href="/products/sell">Sell Product</Nav>
           <Nav href="/products">Browse</Nav>
-          <Nav href="/forum">Forum</Nav>
         </div>
       </div>
 
