@@ -68,8 +68,6 @@ export default function SellPage() {
     if (!validation.isValid) {
       setErrors(validation.messages);
       setIsSubmitting(false);
-      console.log(payload);
-
       return;
     }
 
