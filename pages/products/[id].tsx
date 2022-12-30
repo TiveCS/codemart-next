@@ -16,7 +16,7 @@ const DetailProduct = (props: DetailProductProps) => {
 
   const { product } = props;
 
-  console.log(product);
+  const title: string = product.title;
 
   return (
     <>

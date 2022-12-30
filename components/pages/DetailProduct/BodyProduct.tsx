@@ -8,7 +8,7 @@ const BodyProduct: React.FC<BodyProductProps> = ({
   product,
 }: BodyProductProps) => {
   return (
-    <div className="">
+    <div>
       <h4 className="mb-2 text-lg font-medium">Description</h4>
       <p className="text-base leading-loose">{product.description}</p>
     </div>
