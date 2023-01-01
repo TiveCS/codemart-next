@@ -28,7 +28,6 @@ const Navbar: React.FC<Props> = (props) => {
           <Nav href="/">Home</Nav>
           <Nav href="/products/sell">Sell Product</Nav>
           <Nav href="/products">Browse</Nav>
-          <Nav href="/forum">Forum</Nav>
         </div>
       </div>
 
@@ -43,7 +42,7 @@ const Navbar: React.FC<Props> = (props) => {
         ) : (
           <Link href={'/auth/signin'}>
             <Button type="primary" size="md" textSize="sm">
-              Join Now
+              {status === 'loading' ? 'Loading...' : 'Sign In'}
             </Button>
           </Link>
         )}

@@ -13,6 +13,7 @@ export interface Props {
   name?: string;
   value?: string | number | readonly string[] | undefined;
   isTextArea?: boolean;
+  error?: string;
 }
 
 const FormInput: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const FormInput: React.FC<Props> = ({
   required = true,
   value,
   isTextArea = false,
+  error,
 }: Props) => {
   if (isTextArea)
     return (
@@ -46,20 +48,23 @@ const FormInput: React.FC<Props> = ({
     );
 
   return (
-    <input
-      id={id}
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      className={
-        'w-full px-4 py-3 text-sm border rounded-md appearance-none border-recandy-gray-50'
-      }
-      onChange={onChange}
-      onClick={onClick}
-      accept={accept}
-      required={required}
-      value={value}
-    />
+    <label>
+      <input
+        id={id}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        className={
+          'w-full px-4 py-3 text-sm border rounded-md appearance-none border-recandy-gray-50'
+        }
+        onChange={onChange}
+        onClick={onClick}
+        accept={accept}
+        required={required}
+        value={value}
+      />
+      <p className="text-sm text-red-500">{error}</p>
+    </label>
   );
 };
 
