@@ -30,7 +30,7 @@ getDataFromAPI();
       // Menampilkan data di console
       console.log(data);
   
-    } catch (error) {
+    } catch (error: any) {
       // Tampilkan pesan error jika terjadi masalah saat mengirim permintaan
       console.error(error.message);
     }
