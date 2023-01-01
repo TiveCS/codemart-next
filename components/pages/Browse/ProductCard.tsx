@@ -4,7 +4,7 @@ import Button from '../../Button';
 import Category from './Category';
 
 export interface Props {
-  id: number,
+  id: number;
   title: string;
   image: string;
   categories: string[];
