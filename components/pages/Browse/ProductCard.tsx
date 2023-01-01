@@ -4,6 +4,7 @@ import Button from '../../Button';
 import Category from './Category';
 
 export interface Props {
+  id: number,
   title: string;
   image: string;
   categories: string[];
@@ -12,6 +13,7 @@ export interface Props {
 }
 
 const ProductCard: React.FC<Props> = ({
+  id,
   title,
   image,
   categories,
@@ -49,7 +51,7 @@ const ProductCard: React.FC<Props> = ({
             <div className="flex flex-row items-center justify-between">
               <p className="text-sm text-recandy-blue-700">{priceTag}</p>
 
-              <Link href={`/products/1`}>
+              <Link href={`/products/${id}`}>
                 <Button type="primary" textSize="sm">
                   Show Details
                 </Button>
