@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import prisma from '../../../lib/prisma';
+import { type } from 'os';
 
 type PostData = {
   title: string;
@@ -13,6 +14,24 @@ type PostData = {
   pictureFile: string;
   authorEmail: string;
 };
+
+export type ProductForBrowse = {
+  id: number;
+    title: string;
+    price: number;
+    image_url: string | null;
+    categories: {
+        name: string;
+    }[];
+    author: {
+        name: string | null;
+    };
+};
+
+export type GetResponse = {
+  count: number;
+  products: ProductForBrowse[];
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,14 +44,25 @@ export default async function handler(
         title: true,
         price: true,
         image_url: true,
-        categories: true,
+        categories: {
+          select: {
+            name: true,
+          }
+        },
+        author: {
+          select:{
+            name: true,
+          }
+        },
       },
     });
 
-    res.status(200).json({
+    const data: GetResponse = {
       count: products.length,
-      products,
-    });
+      products
+     };
+
+    res.status(200).json(data);
   } else if (req.method === 'POST') {
     const {
       title,
