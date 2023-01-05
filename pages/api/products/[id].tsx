@@ -1,6 +1,6 @@
 import { Product } from '@prisma/client';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../lib/prisma';
+import { prisma } from '../../../lib/prisma';
 
 export type ProductWithAuthor = Product & { author: { name: string | null } };
 
