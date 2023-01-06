@@ -1,9 +1,10 @@
 export interface Props {
   title: string;
   categories: string[];
+  onClick: (category: string) => void;
 }
 
-const SidebarCategory: React.FC<Props> = ({ title, categories }) => {
+const SidebarCategory: React.FC<Props> = ({ title, categories, onClick }) => {
   return (
     <div className="pt-4 mt-4 mb-8 border-t-2 border-r-recandy-gray-50">
       <h6>{title}</h6>
@@ -15,6 +16,7 @@ const SidebarCategory: React.FC<Props> = ({ title, categories }) => {
               <input
                 type="checkbox"
                 className="w-5 h-5 form-checkbox text-recandy-blue-500"
+                onClick={() => onClick(category)}
               />
               <span className="ml-2 text-sm text-recandy-black-700">
                 {category}
