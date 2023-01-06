@@ -12,6 +12,7 @@ const BrowsePage: React.FC<Props> = () => {
   // bikin state buat ngimpen data produk
   //const [products, setProduct] = useState<object>({});
   const [products, setProduct] = useState<ProductForBrowse[]>([]);
+  const [filterCategories, setFilterCategories] = useState<string[]>([]);
 
   useEffect(() => {
     getDataFromAPI();
@@ -35,10 +36,15 @@ const BrowsePage: React.FC<Props> = () => {
     }
   };
 
+  const handleCategoryChange = (categories: string[]) => {
+    setFilterCategories(categories);
+  };
+
+  
   return (
     <>
       <main className="flex flex-row justify-between px-32 py-16 bg-recandy-white-50">
-        <Sidebar />
+        <Sidebar onChange={handleCategoryChange}/>
 
         <div className="w-3/4">
           <SearchBar />
@@ -53,7 +59,16 @@ const BrowsePage: React.FC<Props> = () => {
               const categories: string[] = product.categories.map(
                 (c) => c.name
               );
+              
+              if (filterCategories.length > 0) {
+                const isCategoryMatched = filterCategories.some((c) =>
+                  categories.includes(c)
+                );
 
+                if (!isCategoryMatched) {
+                  return null;
+                }
+              }
               return (
                 <ProductCard
                   key={product.id}
