@@ -27,7 +27,7 @@ const ProductCard: React.FC<Props> = ({
       <Head>
         <title>CodeMart - Browse</title>
       </Head>
-      <div className="pb-3 shadow-2xl bg-recandy-white-0">
+      <div className="pb-8 shadow-2xl bg-recandy-white-0">
         <div className="h-1/2">
           <img className="w-full h-full" src={image} alt="" />
         </div>
@@ -40,11 +40,9 @@ const ProductCard: React.FC<Props> = ({
           </div>
 
           <div className="flex flex-col justify-between px-4 py-4 space-y-4 h-2/3">
-            <Link href="#">
-              <p className="text-xs text-recandy-gray-800">{author}</p>
-            </Link>
+            <p className="text-xs text-recandy-gray-800">{author}</p>
 
-            <Link href="#">
+            <Link href={`/products/${id}`}>
               <h5 className="text-base font-medium">{title}</h5>
             </Link>
 
