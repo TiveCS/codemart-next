@@ -1,7 +1,19 @@
 import Link from 'next/link';
 import Button from '../../Button';
+import { useEffect, useState } from 'react';
 
-const SearchBar: React.FC = () => {
+interface Props {
+  onChange: (newSearch: string) => void;
+}
+
+const SearchBar: React.FC<Props> = ({ onChange }) => {
+  
+  const [search, setSearch] = useState<string>('');
+
+  useEffect(() => {
+    onChange(search);
+  }, [search, onChange]);
+
   return (
     <form className="grid grid-flow-col grid-cols-4 gap-8 mb-8">
       <input
@@ -10,6 +22,7 @@ const SearchBar: React.FC = () => {
         type="text"
         name="search-product"
         id="search-product"
+        onChange = {(e) => setSearch(e.target.value)}
       />
 
       <Link href={'/products/sell'}>
