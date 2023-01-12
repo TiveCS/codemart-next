@@ -35,6 +35,15 @@ const Navbar: React.FC<Props> = (props) => {
         {status === 'authenticated' ? (
           <>
             <p>{session.user?.name}</p>
+
+            <Image
+              src={session.user?.image as string}
+              width={40}
+              height={40}
+              alt="Profile"
+              className="rounded-full"
+            />
+
             <Button type="text" textSize="sm" onClick={() => signOut()}>
               Sign Out
             </Button>

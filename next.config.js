@@ -9,6 +9,11 @@ const nextConfig = {
         hostname: 'rehoukrel-storage.is3.cloudhost.id',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+      },
     ],
   },
 };
